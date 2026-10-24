@@ -8,12 +8,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export const SceneBackdrop: React.FC = () => {
-  const innerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const inner = innerRef.current;
-    if (!inner) return;
+    const parallax = parallaxRef.current;
+    if (!inner || !parallax) return;
 
     // Check motion preference
     const isMotionOff = () =>
@@ -21,7 +23,7 @@ export const SceneBackdrop: React.FC = () => {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (isMotionOff()) {
-      gsap.set(inner, { opacity: 1, y: 0, scale: 1, filter: 'none' });
+      gsap.set([inner, parallax], { opacity: 1, y: 0, x: 0, scale: 1, filter: 'none' });
       return;
     }
 
@@ -32,8 +34,8 @@ export const SceneBackdrop: React.FC = () => {
         inner,
         {
           opacity: 0,
-          scale: 0.94,
-          y: 40,
+          scale: 0.95,
+          y: 35,
           filter: 'blur(10px)',
         },
         {
@@ -41,7 +43,7 @@ export const SceneBackdrop: React.FC = () => {
           scale: 1,
           y: 0,
           filter: 'blur(0px)',
-          duration: 1.35,
+          duration: 1.3,
           ease: 'power3.out',
           onComplete: () => {
             gsap.set(inner, { clearProps: 'filter' });
@@ -49,13 +51,15 @@ export const SceneBackdrop: React.FC = () => {
         }
       );
 
-      // 2. Scroll-linked movement tied to hero section
+      // 2. Scroll-linked parallax movement tied to hero section
+      // NOTE: Opacity remains fully visible (1) throughout the scroll.
+      // The portrait does NOT vanish; it gently parallaxes upward as the hero scrolls,
+      // and is naturally eclipsed as the incoming solid sections (.solid-section) scroll over it.
       const heroEl = document.querySelector<HTMLElement>('#top') || document.querySelector<HTMLElement>('.hero');
       if (heroEl) {
         gsap.to(inner, {
-          y: -95,
-          scale: 0.92,
-          opacity: 0.08,
+          y: -50,
+          scale: 0.98,
           ease: 'none',
           scrollTrigger: {
             trigger: heroEl,
@@ -67,18 +71,17 @@ export const SceneBackdrop: React.FC = () => {
         });
       }
 
-      // 3. Subtle pointer parallax on desktop
+      // 3. Subtle pointer parallax on desktop (applied to separate parallax wrapper)
       const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       if (isFinePointer) {
-        const xTo = gsap.quickTo(inner, 'x', { duration: 0.8, ease: 'power2.out' });
-        const yTo = gsap.quickTo(inner, 'y', { duration: 0.8, ease: 'power2.out' });
+        const xTo = gsap.quickTo(parallax, 'x', { duration: 0.8, ease: 'power2.out' });
+        const yTo = gsap.quickTo(parallax, 'y', { duration: 0.8, ease: 'power2.out' });
 
         const handlePointerMove = (e: PointerEvent) => {
           if (isMotionOff()) return;
-          // Only apply parallax while in upper half of page
           if (window.scrollY > window.innerHeight) return;
-          const normX = (e.clientX / window.innerWidth - 0.5) * 14;
-          const normY = (e.clientY / window.innerHeight - 0.5) * 10;
+          const normX = (e.clientX / window.innerWidth - 0.5) * 12;
+          const normY = (e.clientY / window.innerHeight - 0.5) * 8;
           xTo(normX);
           yTo(normY);
         };
@@ -92,7 +95,7 @@ export const SceneBackdrop: React.FC = () => {
     const observer = new MutationObserver(() => {
       if (isMotionOff()) {
         ctx.revert();
-        gsap.set(inner, { opacity: 1, y: 0, scale: 1, x: 0, filter: 'none' });
+        gsap.set([inner, parallax], { opacity: 1, y: 0, scale: 1, x: 0, filter: 'none' });
       } else {
         ScrollTrigger.refresh();
       }
@@ -114,6 +117,7 @@ export const SceneBackdrop: React.FC = () => {
       <div className="artifact-fallback">
         <div
           ref={innerRef}
+          className="portrait-inner"
           style={{
             width: '100%',
             height: '100%',
@@ -122,21 +126,31 @@ export const SceneBackdrop: React.FC = () => {
             transformOrigin: 'center center',
           }}
         >
-          <Image
-            src="/images/areen-hero.jpg"
-            alt="Areen Joshi portrait"
-            width={883}
-            height={1024}
-            priority
-            fetchPriority="high"
+          <div
+            ref={parallaxRef}
             style={{
-              objectFit: 'cover',
-              objectPosition: 'center 20%',
               width: '100%',
               height: '100%',
-              filter: 'contrast(1.05) brightness(0.95)',
+              position: 'relative',
+              willChange: 'transform',
             }}
-          />
+          >
+            <Image
+              src="/images/areen-hero.jpg"
+              alt="Areen Joshi portrait"
+              width={883}
+              height={1024}
+              priority
+              fetchPriority="high"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center 20%',
+                width: '100%',
+                height: '100%',
+                filter: 'contrast(1.05) brightness(0.95)',
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
