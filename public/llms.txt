@@ -1,0 +1,44 @@
+# Areen Joshi — AI/ML Engineer & Systems Builder
+> Personal portfolio and verified engineering dossier for Areen Joshi.
+> B.Tech in Artificial Intelligence, Medi-Caps University, Indore (2024–2028).
+
+## Summary
+AI engineering undergraduate specializing in applied machine learning, LLM systems, model evaluation, and MLOps infrastructure. Actively seeking AI/ML engineering internships, research opportunities, and open-source contributions.
+
+## Education
+- **Degree**: Bachelor of Technology in Artificial Intelligence
+- **Institution**: Medi-Caps University, Indore, India (2024 – June 2028)
+- **Academic Standing**: 8.32 / 10.0 GPA
+- **Core Coursework**: Data Structures & Algorithms, Machine Learning, Operating Systems, Database Management Systems, Computer Networks, Artificial Intelligence.
+
+## Core Projects
+- **MLOps Experiment Tracking & Model Registry System**:
+  - Implemented scikit-learn models (optimized ElasticNet reaching 82% R² in experimental runs).
+  - Instrumented automated metric logging (RMSE, MAE, R²) and artifact storage using MLflow and DAGsHub remote tracking.
+  - Reproducible environments managed via Git and Conda.
+- **LCEL Chatbot Application**:
+  - Engineered LLM interaction pipelines using LangChain Expression Language (LCEL).
+  - Built low-latency REST endpoints using FastAPI and LangServe.
+  - Integrated Groq high-throughput hosted inference with dynamic prompt templates and output parsers.
+- **Bank Customer Churn Prediction System**:
+  - Supervised classification using an Artificial Neural Network (ANN) built with TensorFlow/Keras.
+  - Incorporated feature engineering, StandardScaler, and dropout regularization.
+  - Monitored training dynamics via TensorBoard; built Streamlit inference interface.
+- **Student Performance Regression Pipeline**:
+  - Benchmarked multiple regression algorithms using scikit-learn (achieved R² = 0.88).
+  - Constructed leak-free preprocessing pipelines with ColumnTransformer, OneHotEncoder, and StandardScaler.
+
+## Open Source Contributions
+- **Streamlit**: Investigated st.chat_input height retention issue (#12079) and submitted PR #12081.
+- **LangGraph**: Diagnosed CLI dependency path handling on Windows and proposed POSIX path normalization (Issue #5815, PR #5817).
+- **Kornia**: Addressed tensor shear-range validation in augmentation utilities (PR #5713).
+
+## Technical Skills
+- **Languages**: Python, SQL, C++, TypeScript, JavaScript.
+- **Frameworks & Libraries**: PyTorch, TensorFlow, Keras, scikit-learn, LangChain, FastAPI, Streamlit, Pandas, NumPy.
+- **MLOps & Tools**: MLflow, DAGsHub, TensorBoard, Git, GitHub, Docker, Linux, Conda.
+
+## Links
+- **GitHub**: https://github.com/Areen3112
+- **LinkedIn**: https://linkedin.com/in/areen-joshi
+- **Portfolio**: https://areen-portfolio.vercel.app
