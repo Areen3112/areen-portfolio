@@ -2,6 +2,10 @@
 
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
@@ -18,6 +22,8 @@ export const SmoothScroll: React.FC<{ children: React.ReactNode }> = ({ children
       wheelMultiplier: 1.0,
       touchMultiplier: 2.0,
     });
+
+    lenis.on('scroll', ScrollTrigger.update);
 
     const progressEl = document.querySelector<HTMLElement>('.scroll-progress');
 

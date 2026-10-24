@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowUpRight, ArrowUp, Mail, Copy, Check } from 'lucide-react';
+import { ArrowUpRight, ArrowUp, Mail, Copy, Check, FileDown } from 'lucide-react';
 import { SignalText } from './SignalText';
 
 export const Contact: React.FC = () => {
@@ -42,6 +42,28 @@ export const Contact: React.FC = () => {
             rel="noopener noreferrer"
           >
             Connect on LinkedIn <ArrowUpRight size={24} />
+          </a>
+
+          <a
+            className="pill-link"
+            href="/Areen-Joshi-Resume.pdf"
+            download="Areen-Joshi-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Areen Joshi Résumé (PDF)"
+            style={{
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '16px 24px',
+              fontSize: '13px',
+              fontFamily: 'var(--font-mono)',
+              borderColor: 'var(--blue)',
+            }}
+          >
+            <FileDown size={16} color="var(--blue)" />
+            <SignalText>Download Résumé</SignalText>
           </a>
 
           <button
@@ -94,6 +116,15 @@ export const Contact: React.FC = () => {
             href="mailto:areenjoshi@gmail.com"
           >
             Email <ArrowUpRight size={12} />
+          </a>
+          <a
+            href="/Areen-Joshi-Resume.pdf"
+            download="Areen-Joshi-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download Résumé (PDF)"
+          >
+            Résumé <FileDown size={12} />
           </a>
           <a
             className="back-top"

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, FileDown } from 'lucide-react';
 import { SignalText } from './SignalText';
 
 export const Hero: React.FC = () => {
@@ -39,6 +39,21 @@ export const Hero: React.FC = () => {
             <a className="pill-link" href="#work">
               <SignalText>Explore my work</SignalText>
               <ArrowDown size={16} />
+            </a>
+            <a
+              className="pill-link"
+              href="/Areen-Joshi-Resume.pdf"
+              download="Areen-Joshi-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download Areen Joshi Résumé (PDF)"
+              style={{
+                borderColor: 'var(--blue)',
+                boxShadow: 'inset 0 1px rgba(255,140,89,0.2), 0 2px 10px rgba(0,0,0,0.3)',
+              }}
+            >
+              <FileDown size={16} color="var(--blue)" />
+              <SignalText>Download Résumé</SignalText>
             </a>
             <a className="text-link" href="#contact">
               <SignalText>Start a conversation</SignalText>
